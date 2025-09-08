@@ -79,7 +79,7 @@ def compute_stereo_depth_opencv(img1, img2, baseline_distance, focal_length):
 
 
 def create_dense_points_from_stereo_pairs(
-    image_dir="test_data2", max_points_total=20000
+    image_dir="test_data2", max_points_total=80000
 ):
     """Create dense point cloud using stereo matching between image pairs"""
 
@@ -209,8 +209,8 @@ def create_dense_points_from_stereo_pairs(
 
             # Subsample if too many points
             max_points_per_pair = min(
-                5000, max_points_total // 10
-            )  # Reasonable limit per pair
+                15000, max_points_total // 10
+            )  # Higher limit per pair for production quality
             if len(points_world) > max_points_per_pair:
                 indices = np.random.choice(
                     len(points_world), max_points_per_pair, replace=False
@@ -218,6 +218,8 @@ def create_dense_points_from_stereo_pairs(
                 points_world = points_world[indices]
                 colors = colors[indices]
                 print(f"   📉 Subsampled to {max_points_per_pair:,} points")
+            else:
+                print(f"   ✅ Using all {len(points_world):,} points")
 
             all_dense_points.append(points_world)
             all_dense_colors.append(colors)
@@ -271,7 +273,7 @@ def test_opencv_stereo_depth():
     print("🧪 TESTING OPENCV STEREO DEPTH")
     print("=" * 30)
 
-    result = create_dense_points_from_stereo_pairs(max_points_total=20000)
+    result = create_dense_points_from_stereo_pairs(max_points_total=80000)
 
     if result:
         points_count = result["total_points"]
