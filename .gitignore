@@ -1,0 +1,38 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+ENV/
+env/
+
+# uv lock file (regeneratable)
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test outputs and temporary files
+*.jpg
+*.png
+*.ply
+colmap_output/
+colmap_dense/
+virtual_views/
+
+# Zone identifier files (WSL)
+*.Zone.Identifier
