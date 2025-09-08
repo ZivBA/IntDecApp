@@ -36,3 +36,4 @@ virtual_views/
 
 # Zone identifier files (WSL)
 *.Zone.Identifier
+.mcp.json
